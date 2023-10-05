@@ -4,7 +4,7 @@ import goldStar from '../../assets/goldStar.svg';
 import { useNotes } from '../../hooks/useNotes';
 
 function CreateCard() {
-    const { message, errorMessage, createNote } = useNotes();
+    const { createNote } = useNotes();
     const [note, setNote] = useState({
         title: '',
         color: '',
@@ -28,8 +28,6 @@ function CreateCard() {
 
     return (
         <div className="px-8 pt-[25px]">
-            {message}
-            {errorMessage}
             <div className="max-w-md mx-auto bg-white  rounded-[25px] sm:rounded-[3px] shadow-md">
                 <div className="border-b-2 flex items-center justify-between">
                     <input

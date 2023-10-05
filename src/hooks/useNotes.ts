@@ -72,5 +72,7 @@ export function useNotes() {
         updateNotes,
         deleteNotes,
         notes,
+        setMessage,
+        setErrorMessage,
     };
 }

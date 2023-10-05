@@ -2,13 +2,14 @@ import { useEffect } from 'react';
 import CreateCard from '../../components/Cards/CardCreate';
 import CardNotes from '../../components/Cards/CardNotes';
 import { useNotes } from '../../hooks/useNotes';
+import { IPropsHome } from '../../types/interfaces/INotes';
 
-function Home() {
+function Home({ search }: IPropsHome) {
     const { getNotes, notes } = useNotes();
 
     useEffect(() => {
-        getNotes();
-    });
+        getNotes(search);
+    }, [getNotes, search]);
 
     const favoriteNotes = notes.filter((note) => note.is_favorite === true);
     const notFavoriteNotes = notes.filter((note) => note.is_favorite === false);

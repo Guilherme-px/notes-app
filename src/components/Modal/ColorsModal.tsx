@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { INotes } from '../../types/interfaces/INotes';
+import { ColorModalProps } from '../../types/interfaces/INotes';
 import { useNotes } from '../../hooks/useNotes';
 
 const colorOptions = {
@@ -16,14 +16,6 @@ const colorOptions = {
     GRAY: '#979797',
     OLIVE: '#A99A7C',
 };
-
-interface ColorModalProps {
-    isOpen: boolean;
-    onSelectColor: (color: string) => void;
-    buttonPosition: { top: number; left: number };
-    noteData: INotes;
-    id: string;
-}
 
 function ColorsModal({
     isOpen,

@@ -18,15 +18,26 @@ export function useNotes() {
             });
     };
 
-    const getNotes = async () => {
-        await api
-            .get('/notes')
-            .then((res) => {
-                setNotes(res.data);
-            })
-            .catch((error) => {
-                setErrorMessage(error.response.data.message);
-            });
+    const getNotes = async (searchTerm?: string | null) => {
+        if (searchTerm !== undefined) {
+            await api
+                .get(`/notes?search=${searchTerm}`)
+                .then((res) => {
+                    setNotes(res.data);
+                })
+                .catch((error) => {
+                    setErrorMessage(error.response.data.message);
+                });
+        } else {
+            await api
+                .get('/notes')
+                .then((res) => {
+                    setNotes(res.data);
+                })
+                .catch((error) => {
+                    setErrorMessage(error.response.data.message);
+                });
+        }
     };
 
     const updateNotes = async (id: string, updatedNotes: INotes) => {
@@ -36,6 +47,7 @@ export function useNotes() {
                 setMessage(res.data.message);
             })
             .catch((error) => {
+                console.log(error);
                 setErrorMessage(error.response.data.message);
             });
     };

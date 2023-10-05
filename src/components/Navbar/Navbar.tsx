@@ -1,7 +1,15 @@
+import { useState } from 'react';
 import logo from '../../assets/logo.png';
 import searchIcon from '../../assets/searchIcon.svg';
+import { IPropsNavbar } from '../../types/interfaces/INotes';
 
-const Navbar = () => {
+const Navbar = ({ setSearch }: IPropsNavbar) => {
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearch = () => {
+        setSearch(searchTerm);
+    };
+
     return (
         <div className="flex items-center flex-wrap shadow-md">
             <div className="flex items-center w-90 gap-6">
@@ -20,12 +28,16 @@ const Navbar = () => {
                     type="text"
                     placeholder="Pesquisar notas"
                     className="w-full bg-transparent border-none focus:outline-none"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <img
-                    src={searchIcon}
-                    alt="icone de busca"
-                    className="w-5 h-5 mr-2"
-                />
+                <button onClick={handleSearch}>
+                    <img
+                        src={searchIcon}
+                        alt="icone de busca"
+                        className="w-5 h-5 mr-2"
+                    />
+                </button>
             </div>
         </div>
     );

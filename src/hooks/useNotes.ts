@@ -36,7 +36,6 @@ export function useNotes() {
                 setMessage(res.data.message);
             })
             .catch((error) => {
-                console.log(error);
                 setErrorMessage(error.response.data.message);
             });
     };

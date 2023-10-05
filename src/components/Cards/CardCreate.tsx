@@ -1,13 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import star from '../../assets/star.svg';
 import goldStar from '../../assets/goldStar.svg';
-import { api } from '../../services/api';
-import { INotes } from '../../types/interfaces/INotes';
+import { useNotes } from '../../hooks/useNotes';
 
 function CreateCard() {
-    const [message, setMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [note, setNote] = useState<INotes>({
+    const { message, errorMessage, createNote } = useNotes();
+    const [note, setNote] = useState({
         title: '',
         color: '',
         is_favorite: false,
@@ -21,15 +19,7 @@ function CreateCard() {
     };
 
     const handleSubmit = async () => {
-        await api
-            .post('/notes', note)
-            .then((res) => {
-                setNote({ title: '', color: '', is_favorite: false });
-                setMessage(res.data.message);
-            })
-            .catch((error) => {
-                setErrorMessage(error.response.data.message);
-            });
+        await createNote(note);
     };
 
     return (

@@ -25,7 +25,7 @@ function Home() {
                             className="w-full md:w-1/3 px-4 pb-12 pt-2"
                             key={note.id}
                         >
-                            <CardNotes noteData={note} />
+                            <CardNotes noteData={note} id={note.id} />
                         </div>
                     ))}
                 </div>
@@ -40,7 +40,7 @@ function Home() {
                             className="w-full md:w-1/3 px-4 pb-12 pt-2"
                             key={note.id}
                         >
-                            <CardNotes noteData={note} />
+                            <CardNotes noteData={note} id={note.id} />
                         </div>
                     ))}
                 </div>

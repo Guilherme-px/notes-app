@@ -29,11 +29,24 @@ export function useNotes() {
             });
     };
 
+    const updateNotes = async (id: string, updatedNotes: INotes) => {
+        await api
+            .put(`/notes/${id}`, updatedNotes)
+            .then((res) => {
+                setMessage(res.data.message);
+            })
+            .catch((error) => {
+                console.log(error);
+                setErrorMessage(error.response.data.message);
+            });
+    };
+
     return {
         message,
         errorMessage,
         createNote,
         getNotes,
+        updateNotes,
         notes,
     };
 }

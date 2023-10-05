@@ -4,14 +4,10 @@ import goldStar from '../../assets/goldStar.svg';
 import editIcon from '../../assets/editIcon.svg';
 import colorPickerIcon from '../../assets/colorPickerIcon.svg';
 import deleteIcon from '../../assets/deleteIcon.svg';
-import { INotes } from '../../types/interfaces/INotes';
+import { INotes, INotesList } from '../../types/interfaces/INotes';
 
-function CardNotes() {
-    const [note, setNote] = useState<INotes>({
-        title: '',
-        color: '',
-        is_favorite: false,
-    });
+function CardNotes({ noteData }: { noteData: INotesList }) {
+    const [note, setNote] = useState<INotes>({ ...noteData });
 
     return (
         <div className="max-w-md bg-white rounded-[25px] shadow-md">
@@ -20,6 +16,7 @@ function CardNotes() {
                     type="text"
                     placeholder="Título"
                     className="w-full text-sm placeholder-text-card-title text-card-text px-6 py-3 border-0 focus:outline-none rounded-[25px]"
+                    value={note.title}
                 />
                 <button
                     className="p-2"

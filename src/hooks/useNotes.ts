@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { api } from '../services/api';
-import { INotes } from '../types/interfaces/INotes';
+import { INotes, INotesList } from '../types/interfaces/INotes';
 
 export function useNotes() {
+    const [notes, setNotes] = useState<INotesList[]>([]);
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -17,9 +18,22 @@ export function useNotes() {
             });
     };
 
+    const getNotes = async () => {
+        await api
+            .get('/notes')
+            .then((res) => {
+                setNotes(res.data);
+            })
+            .catch((error) => {
+                setErrorMessage(error.response.data.message);
+            });
+    };
+
     return {
         message,
         errorMessage,
         createNote,
+        getNotes,
+        notes,
     };
 }

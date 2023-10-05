@@ -10,7 +10,7 @@ import { useNotes } from '../../hooks/useNotes';
 import ColorsModal from '../Modal/ColorsModal';
 
 function CardNotes({ noteData, id }: { noteData: INotesList; id: string }) {
-    const { updateNotes } = useNotes();
+    const { updateNotes, deleteNotes } = useNotes();
     const [note, setNote] = useState<INotes>({ ...noteData });
     const [isEditing, setIsEditing] = useState(false);
     const [isColorModalOpen, setIsColorModalOpen] = useState(false);
@@ -24,7 +24,7 @@ function CardNotes({ noteData, id }: { noteData: INotesList; id: string }) {
         setIsEditing(true);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         updateNotes(id, {
             title: note.title,
             color: note.color,
@@ -62,6 +62,10 @@ function CardNotes({ noteData, id }: { noteData: INotesList; id: string }) {
         }
     };
 
+    const handleDelete = async () => {
+        await deleteNotes(id);
+    };
+
     return (
         <>
             <div
@@ -77,6 +81,11 @@ function CardNotes({ noteData, id }: { noteData: INotesList; id: string }) {
                         <input
                             type="text"
                             className="w-full text-sm placeholder-text-card-title text-card-text px-6 py-3 border-0 focus:outline-none rounded-[25px]"
+                            style={
+                                note.color
+                                    ? { background: note.color }
+                                    : { background: 'white' }
+                            }
                             value={note.title}
                             onChange={(e) =>
                                 setNote({ ...note, title: e.target.value })
@@ -151,7 +160,7 @@ function CardNotes({ noteData, id }: { noteData: INotesList; id: string }) {
                             </button>
                         </div>
                         <div>
-                            <button onClick={() => alert('deletar')}>
+                            <button onClick={handleDelete}>
                                 <img
                                     src={deleteIcon}
                                     alt="Icone para deletar"

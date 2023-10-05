@@ -9,7 +9,7 @@ function Home({ search }: IPropsHome) {
 
     useEffect(() => {
         getNotes(search);
-    }, [getNotes, search]);
+    }, [search, getNotes]);
 
     const favoriteNotes = notes.filter((note) => note.is_favorite === true);
     const notFavoriteNotes = notes.filter((note) => note.is_favorite === false);

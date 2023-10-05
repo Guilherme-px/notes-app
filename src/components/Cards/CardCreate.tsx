@@ -20,6 +20,10 @@ function CreateCard() {
 
     const handleSubmit = async () => {
         await createNote(note);
+        setNote({
+            ...note,
+            title: '',
+        });
     };
 
     return (

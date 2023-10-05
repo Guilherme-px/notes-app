@@ -10,8 +10,9 @@ export function useNotes() {
     const createNote = async (newNote: INotes) => {
         await api
             .post('/notes', newNote)
-            .then((res) => {
+            .then(async (res) => {
                 setMessage(res.data.message);
+                await getNotes();
             })
             .catch((error) => {
                 setErrorMessage(error.response.data.message);
@@ -43,21 +44,33 @@ export function useNotes() {
     const updateNotes = async (id: string, updatedNotes: INotes) => {
         await api
             .put(`/notes/${id}`, updatedNotes)
-            .then((res) => {
+            .then(async (res) => {
                 setMessage(res.data.message);
+                await getNotes();
             })
             .catch((error) => {
-                console.log(error);
                 setErrorMessage(error.response.data.message);
             });
     };
 
+    const deleteNotes = async (id: string) => {
+        await api
+            .delete(`/notes/${id}`)
+            .then(async (res) => {
+                setMessage(res.data.message);
+                await getNotes();
+            })
+            .catch((error) => {
+                setErrorMessage(error.response.data.message);
+            });
+    };
     return {
         message,
         errorMessage,
         createNote,
         getNotes,
         updateNotes,
+        deleteNotes,
         notes,
     };
 }

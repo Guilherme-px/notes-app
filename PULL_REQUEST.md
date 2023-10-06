@@ -2,6 +2,10 @@
 
 A aplicação foi desenvolvida com a biblioteca React.js e a linguagem typescript usando tailwind para a customização, foi usado também eslint, prettier com husky e lint-staged para padronizar o código e controlar os commits para que não sejam feitos commits fora das regras definidas para padronização.
 
+## Acessar projeto
+
+https://client-nine-lime.vercel.app/
+
 ## Índice
 
 1. [Introdução](#introdução)
